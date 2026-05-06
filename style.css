@@ -10,10 +10,12 @@ assignment
 bar_chart
 */
 
+/* https://github.com/jrcampos82/web1-2026-dash-01.git */
+
 :root {
   /* Icons */
   --icon-color-default: #777;
-
+  --icon-color-search: #626a6e;
   /* Header */
   --bg-header: #438afc;
 
@@ -85,6 +87,20 @@ header {
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
   height: 800px;
   /* overflow-y: auto; */
+}
+
+.search-box {
+  display: flex;
+}
+
+.search-box .material-icons {
+  font-size: 24px;
+  color: var(--icon-color-search);
+}
+
+.search-box input {
+  width: 200px;
+  margin-left: 5px;
 }
 
 main {
