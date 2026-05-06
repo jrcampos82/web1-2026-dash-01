@@ -63,14 +63,14 @@ header {
 .sub-header {
   display: flex;
   justify-content: space-between;
-  height: 150px;
   background-color: var(--bg-header);
+  height: 150px;
   width: 100%;
 }
 
 .box1 {
   width: 280px;
-  background-color: var(--bg-perfil);
+  background-color: #438afc;
 }
 
 .box2 {
@@ -97,8 +97,3 @@ main {
   padding: 30px;
   min-height: 100%;
 }
-
-/*
-gh repo create web1-2026-dash-01 --private --source=. --remote=origin --push
-
-*/
