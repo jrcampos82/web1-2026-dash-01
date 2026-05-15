@@ -12,12 +12,76 @@
   </head>
   <body>
     <div class="container">
-      <header>x</header>
+      <!-- Início do Cabeçalho Principal -->
+      <header>
+        <!-- Bloco Esquerdo do Cabeçalho: Logo, Título e Ícones -->
+        <div class="header-box1">
+          <span class="material-icons logo-icon">terrain</span>
+          <span class="brand-text">Material Able</span>
+          <span class="material-icons menu-icon">menu</span>
+          <span class="material-icons fullscreen-icon">fullscreen</span>
+        </div>
 
+        <!-- Bloco Direito do Cabeçalho: Notificação e Perfil -->
+        <div class="header-box2">
+          <!-- Notificações -->
+          <div class="notification">
+            <span class="material-icons">notifications</span>
+            <span class="badge"></span>
+          </div>
+          <!-- Perfil de Usuário -->
+          <div class="user-profile">
+            <img
+              src="img/avatar.avif"
+              alt="User"
+              class="avatar-small"
+              onerror="this.src = 'https://via.placeholder.com/35'"
+            />
+            <div class="perfil">
+              <select name="perfil" id="perfil" class="perfil-select">
+                <option value="john-doe" selected>John Doe</option>
+                <option value="settings">Settings</option>
+                <option value="logout">Logout</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Fim do Cabeçalho Principal -->
+
+      <!-- Início do Sub-Cabeçalho (Área de Dashboard e Perfil Sidebar) -->
       <div class="sub-header">
-        <div class="box1">perfil</div>
-        <div class="box2">welcome</div>
+        <!-- Bloco Esquerdo do Sub-Cabeçalho: Perfil do Usuário -->
+        <div class="box1 profile-box">
+          <img
+            src="img/avatar.avif"
+            alt="User Large"
+            class="avatar-large"
+            onerror="this.src = 'https://via.placeholder.com/70'"
+          />
+          <div class="perfil-large">
+            <select name="perfil-large" id="perfil-large" class="perfil-select">
+              <option value="john-doe" selected>John Doe</option>
+              <option value="settings">Settings</option>
+              <option value="logout">Logout</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bloco Direito do Sub-Cabeçalho: Informações de Boas-vindas -->
+        <div class="box2 dashboard-info">
+          <div class="welcome-text">
+            <h2>Dashboard</h2>
+            <p>Welcome to Material Able</p>
+          </div>
+          <!-- Breadcrumb / Navegação -->
+          <div class="breadcrumb">
+            <span class="material-icons">home</span>
+            <span>> Dashboard</span>
+          </div>
+        </div>
       </div>
+      <!-- Fim do Sub-Cabeçalho -->
       <main>
         <aside class="sidebar">
           <div class="search-box">
@@ -40,10 +104,230 @@
                 </li>
               </ul>
             </div>
+            <div class="menu-section">
+              <h3>UI Element</h3>
+              <ul>
+                <li class="menu-item">
+                  <span class="material-icons">apps</span>
+                  <span class="text">Basic</span>
+                </li>
+              </ul>
+            </div>
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <ul>
+                <li class="menu-item">
+                  <span class="material-icons">layers</span>
+                  <span class="text">Form</span>
+                </li>
+              </ul>
+            </div>
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <ul>
+                <li class="menu-item">
+                  <span class="material-icons">assignment</span>
+                  <span class="text">Table</span>
+                </li>
+              </ul>
+            </div>
+            <div class="menu-section">
+              <h3>Navigation</h3>
+              <ul>
+                <li class="menu-item">
+                  <span class="material-icons">bar_chart</span>
+                  <span class="text">Charts</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </aside>
-        <div class="content">x</div>
+        <div class="content">
+          <!-- daqui p baixo -->
+          <div class="card1">
+            <div class="statistics">
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-indigo">person</span>
+                </div>
+                <div class="box2">
+                  <h4>10k</h4>
+                  <h5>Visitors</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-green">volume_up</span>
+                </div>
+                <div class="box2">
+                  <h4>100%</h4>
+                  <h5>Volume</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-red">description</span>
+                </div>
+                <div class="box2">
+                  <h4>2000+</h4>
+                  <h5>Files</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-indigo"
+                    >mail_outline</span
+                  >
+                </div>
+                <div class="box2">
+                  <h4>120</h4>
+                  <h5>Mails</h5>
+                </div>
+              </div>
+            </div>
+            <div class="statistics">
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-indigo">share</span>
+                </div>
+                <div class="box2">
+                  <h4>4250</h4>
+                  <h5>Share</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-green"
+                    >account_tree</span
+                  >
+                </div>
+                <div class="box2">
+                  <h4>600</h4>
+                  <h5>Network</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-red"
+                    >signal_cellular_alt</span
+                  >
+                </div>
+                <div class="box2">
+                  <h4>350</h4>
+                  <h5>Returns</h5>
+                </div>
+              </div>
+              <div class="info">
+                <div class="box1">
+                  <span class="material-icons icon icon-indigo">wifi</span>
+                </div>
+                <div class="box2">
+                  <h4>100%</h4>
+                  <h5>Connections</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="statistics2">
+              <div class="box1">
+                <div class="icon">
+                  <span class="material-icons icon">star</span>
+                </div>
+                <div class="detail">
+                  <h4>4000+</h4>
+                  <h5>Ratings Received</h5>
+                </div>
+              </div>
+              <div class="box1">
+                <div class="icon">
+                  <span class="material-icons icon">star</span>
+                </div>
+                <div class="detail">
+                  <h4>4000+</h4>
+                  <h5>Ratings Received</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card2">
+            <div class="members">
+              <div class="table-caption">
+                <h4>Member's Performance</h4>
+                <span class="material-icons">bar_chart</span>
+              </div>
+
+              <div class="table-item">
+                <div>
+                  <div class="t-avatar">avatar</div>
+                  <div class="t-content">
+                    <h5>Shirley Hoe</h5>
+                    <h6>Sales executive, NY</h6>
+                  </div>
+                </div>
+                <div class="t-gain">
+                  <span>$78.001</span>
+                  <span class="material-icons">bar_chart</span>
+                </div>
+              </div>
+              <div class="table-item">
+                <div>
+                  <div class="t-avatar">avatar</div>
+                  <div class="t-content">
+                    <h5>Shirley Hoe</h5>
+                    <h6>Sales executive, NY</h6>
+                  </div>
+                </div>
+                <div class="t-gain">
+                  <span>$78.001</span>
+                  <span class="material-icons">bar_chart</span>
+                </div>
+              </div>
+              <div class="table-item">
+                <div>
+                  <div class="t-avatar">avatar</div>
+                  <div class="t-content">
+                    <h5>Shirley Hoe</h5>
+                    <h6>Sales executive, NY</h6>
+                  </div>
+                </div>
+                <div class="t-gain">
+                  <span>$78.001</span>
+                  <span class="material-icons">bar_chart</span>
+                </div>
+              </div>
+              <div class="table-item">
+                <div>
+                  <div class="t-avatar">avatar</div>
+                  <div class="t-content">
+                    <h5>Shirley Hoe</h5>
+                    <h6>Sales executive, NY</h6>
+                  </div>
+                </div>
+                <div class="t-gain">
+                  <span>$78.001</span>
+                  <span class="material-icons">bar_chart</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </body>
 </html>
+
+<!-- nomes dos ícones
+Visitors: person (ou person_outline)
+Volume: volume_up
+Files: description (ou insert_drive_file)
+Mails: mail_outline (ou email)
+
+Share: share
+Network: account_tree
+Returns: signal_cellular_alt (ou bar_chart)
+Connections: wifi
+
+Ícone de Estrela: star
+Ícone de Troféu: emoji_events (ou military_tech)
+-->

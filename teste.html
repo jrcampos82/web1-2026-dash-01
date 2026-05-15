@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CICLO | Pedala com a cidade</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Neutros */
+        --branco: #fafaf8;
+        --cinza-claro: #f2f0eb;
+        --cinza-medio: #e5e2da;
+        --cinza-texto: #6b6860;
+        --preto-suave: #1c1c1a;
+
+        /* Cores de marca */
+        --verde-primario: #4a7c59;
+        --verde-claro: #7aaf8a;
+        --verde-menta: #c8ddd0;
+        --laranja: #c8622a;
+        --laranja-suave: #f0d5c4;
+
+        /* Sombras */
+        --sombra-suave: 0 2px 12px rgba(28, 28, 26, 0.08);
+        --sombra-media: 0 8px 32px rgba(28, 28, 26, 0.12);
+        --sombra-forte: 0 20px 60px rgba(28, 28, 26, 0.18);
+
+        /* Espaçamento */
+        --espaço-xs: 8px;
+        --espaço-sm: 16px;
+        --espaço-md: 32px;
+        --espaço-lag: 64px;
+        --espaço-xl: 96px;
+
+        /* Tipografia */
+        --fonte-titulo: "Lora", serif;
+        --fonte-corpo: "Poppins", sans-serif;
+
+        --bezier: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* RESET & GLOBAL */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: var(--branco);
+        color: var(--preto-suave);
+        font-family: var(--fonte-corpo);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+        object-fit: cover;
+      }
+      ul {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--bezier) 0.3s;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--espaço-sm);
+      }
+      section {
+        padding: var(--espaço-xl) 0;
+      }
+
+      /* UTILS */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s var(--bezier);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 20px 0;
+        transition: all 0.4s var(--bezier);
+      }
+      header.scrolled {
+        background: rgba(250, 250, 248, 0.8);
+        backdrop-filter: blur(12px);
+        padding: 12px 0;
+        box-shadow: var(--sombra-suave);
+      }
+      nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--espaço-md);
+      }
+      .logo {
+        font-family: var(--fonte-titulo);
+        font-weight: 700;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+      }
+      .nav-links a {
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .nav-links a:hover {
+        color: var(--laranja);
+      }
+      .btn-primary {
+        background: var(--laranja);
+        color: white;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .btn-primary:hover {
+        transform: scale(1.05);
+        background: var(--preto-suave);
+      }
+
+      /* HERO */
+      .hero {
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2),
+            rgba(250, 250, 248, 1)
+          ),
+          url("https://images.unsplash.com/photo-1471506480208-91b3a4aa29b1?auto=format&fit=crop&q=80&w=1920");
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.1s linear;
+      }
+      .hero-content {
+        text-align: center;
+        width: 100%;
+      }
+      .hero h1 {
+        font-family: var(--fonte-titulo);
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+      .hero p {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        color: var(--cinza-texto);
+        margin-bottom: 40px;
+      }
+
+      /* IMPACT SECTION */
+      .impact {
+        background: var(--cinza-claro);
+        padding: var(--espaço-lag) 0;
+      }
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        text-align: center;
+      }
+      .metric-number {
+        font-family: var(--fonte-titulo);
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        color: var(--verde-primario);
+        font-weight: 700;
+        display: block;
+      }
+      .metric-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--cinza-texto);
+        font-weight: 500;
+      }
+
+      /* FLEET SECTION */
+      .frota-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--espaço-md);
+        padding: 20px 0;
+      }
+      .bike-card {
+        background: var(--branco);
+        border-radius: 20px;
+        border: 1px solid var(--cinza-medio);
+        overflow: hidden;
+        transition: all 0.3s var(--bezier);
+        position: relative;
+      }
+      .bike-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--sombra-forte);
+      }
+      .bike-img-wrapper {
+        height: 220px;
+        position: relative;
+      }
+      .bike-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .badge-available {
+        background: var(--verde-menta);
+        color: var(--verde-primario);
+      }
+      .bike-info {
+        padding: 24px;
+      }
+      .bike-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .bike-title {
+        font-family: var(--fonte-titulo);
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .bike-type {
+        font-size: 14px;
+        color: var(--verde-primario);
+        font-weight: 600;
+      }
+      .bike-specs {
+        display: flex;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--cinza-texto);
+        margin-bottom: 20px;
+        border-top: 1px solid var(--cinza-medio);
+        padding-top: 15px;
+      }
+      .bike-price {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--preto-suave);
+        margin-bottom: 16px;
+      }
+      .btn-outline {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--verde-primario);
+        border-radius: 12px;
+        color: var(--verde-primario);
+        font-weight: 600;
+        text-align: center;
+        display: block;
+      }
+      .btn-outline:hover {
+        background: var(--verde-primario);
+        color: white;
+      }
+
+      #frota-sentinel {
+        height: 50px;
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+      }
+      .loader {
+        width: 30px;
+        height: 30px;
+        border: 3px solid var(--cinza-medio);
+        border-top-color: var(--verde-primario);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        display: none;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* PRICING */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+        margin-top: 40px;
+      }
+      .plan-card {
+        padding: 40px;
+        border-radius: 24px;
+        border: 1px solid var(--cinza-medio);
+        text-align: center;
+        transition: var(--bezier) 0.3s;
+      }
+      .plan-card.popular {
+        background: var(--verde-primario);
+        color: white;
+        transform: scale(1.05);
+        border: none;
+        box-shadow: var(--sombra-media);
+      }
+      .plan-card.popular .plan-price,
+      .plan-card.popular .plan-feature {
+        color: white;
+      }
+      .plan-price {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 20px 0;
+      }
+      .plan-feature {
+        font-size: 14px;
+        color: var(--cinza-texto);
+        margin-bottom: 10px;
+      }
+      .plan-card.popular .plan-feature {
+        color: var(--verde-menta);
+      }
+      .badge-pop {
+        background: var(--laranja);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 10px;
+        font-weight: 800;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      /* FOOTER */
+      footer {
+        background: #1c1c1a;
+        color: var(--cinza-medio);
+        padding: 80px 0 40px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+      .footer-logo {
+        color: white;
+        font-family: var(--fonte-titulo);
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .footer-links h4 {
+        color: white;
+        margin-bottom: 20px;
+      }
+      .footer-links li {
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+      .footer-bottom {
+        padding-top: 40px;
+        border-top: 1px solid #333;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        .plan-card.popular {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="main-header">
+      <nav class="container">
+        <a href="#" class="logo">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="5" r="3" />
+            <path d="M12 22V12" />
+            <path d="M12 12L7 7" />
+            <path d="M12 12l5-5" />
+            <path d="M18 12a6 6 0 0 0-12 0" />
+          </svg>
+          CICLO
+        </a>
+        <ul class="nav-links">
+          <li><a href="#frota">Frota</a></li>
+          <li><a href="#como-funciona">Como Funciona</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+        <a href="#" class="btn-primary">Alugar Agora</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-img" id="parallax-bg"></div>
+      <div class="container hero-content">
+        <h1 class="reveal">Pedala com a cidade.</h1>
+        <p class="reveal">
+          Liberdade, sustentabilidade e tecnologia em cada pedalada urbana.
+        </p>
+        <div class="reveal">
+          <a
+            href="#frota"
+            class="btn-primary"
+            style="padding: 18px 40px; font-size: 16px"
+            >Explorar Frota</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="impact">
+      <div class="container">
+        <div class="impact-grid">
+          <div class="reveal">
+            <span class="metric-number" data-target="120000">0</span>
+            <span class="metric-label">km percorridos</span>
+          </div>
+          <div class="reveal">
+            <span class="metric-number" data-target="8">0</span>
+            <span class="metric-label">cidades atendidas</span>
+          </div>
+          <div class="reveal">
+            <span class="metric-number" data-target="45000">0</span>
+            <span class="metric-label">usuários ativos</span>
+          </div>
+          <div class="reveal">
+            <span class="metric-number" data-target="18">0</span>
+            <span class="metric-label">t de CO₂ evitado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="frota" class="container">
+      <div style="text-align: center; margin-bottom: 50px" class="reveal">
+        <h2 style="font-family: var(--fonte-titulo); font-size: 42px">
+          Nossa Frota
+        </h2>
+        <p style="color: var(--cinza-texto)">
+          Escolha o seu estilo de mobilidade.
+        </p>
+      </div>
+
+      <div class="frota-grid" id="frota-grid">
+        <!-- Cards injetados via JS -->
+      </div>
+
+      <div id="frota-sentinel">
+        <div class="loader" id="main-loader"></div>
+      </div>
+    </section>
+
+    <section id="planos" style="background: var(--cinza-claro)">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 50px" class="reveal">
+          <h2 style="font-family: var(--fonte-titulo); font-size: 42px">
+            Planos Flexíveis
+          </h2>
+          <p style="color: var(--cinza-texto)">
+            Do passeio de domingo ao uso diário no trabalho.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="plan-card reveal">
+            <h3 style="font-family: var(--fonte-titulo)">Básico</h3>
+            <div class="plan-price">
+              R$ 10<span style="font-size: 16px">/h</span>
+            </div>
+            <p class="plan-feature">Uso por hora</p>
+            <p class="plan-feature">Ideal para passeios</p>
+            <p class="plan-feature">Acesso rápido</p>
+            <a href="#" class="btn-outline" style="margin-top: 20px">Começar</a>
+          </div>
+
+          <div class="plan-card popular reveal">
+            <span class="badge-pop">MAIS ESCOLHIDO</span>
+            <h3 style="font-family: var(--fonte-titulo)">Popular ✦</h3>
+            <div class="plan-price">
+              R$ 35<span style="font-size: 16px">/dia</span>
+            </div>
+            <p class="plan-feature">Uso diário completo</p>
+            <p class="plan-feature">Seguro incluso</p>
+            <p class="plan-feature">Suporte 24h</p>
+            <a
+              href="#"
+              class="btn-primary"
+              style="margin-top: 20px; display: block"
+              >Assinar Agora</a
+            >
+          </div>
+
+          <div class="plan-card reveal">
+            <h3 style="font-family: var(--fonte-titulo)">Premium</h3>
+            <div class="plan-price">
+              R$ 199<span style="font-size: 16px">/mês</span>
+            </div>
+            <p class="plan-feature">Uso ilimitado</p>
+            <p class="plan-feature">Prioridade em e-bikes</p>
+            <p class="plan-feature">Manutenção em casa</p>
+            <a href="#" class="btn-outline" style="margin-top: 20px">Assinar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="contato">
+      <div
+        style="
+          background: var(--laranja-suave);
+          padding: 60px;
+          border-radius: 30px;
+          text-align: center;
+        "
+        class="reveal"
+      >
+        <h2
+          style="
+            font-family: var(--fonte-titulo);
+            font-size: 36px;
+            margin-bottom: 20px;
+          "
+        >
+          Pronto para pedalar?
+        </h2>
+        <p style="margin-bottom: 30px; color: var(--preto-suave)">
+          Junte-se a milhares de pessoas que já transformaram sua forma de mover
+          pela cidade.
+        </p>
+        <a href="#" class="btn-primary" style="padding: 15px 40px"
+          >Baixe o App Agora</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-info">
+            <div class="footer-logo">CICLO</div>
+            <p style="font-size: 14px">
+              Mobilidade inteligente para um futuro sustentável. A cidade é o
+              seu playground.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#">Frota</a></li>
+              <li><a href="#">Como Funciona</a></li>
+              <li><a href="#">Planos</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Suporte</h4>
+            <ul>
+              <li><a href="#">Ajuda</a></li>
+              <li><a href="#">Segurança</a></li>
+              <li><a href="#">Termos de Uso</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Redes Sociais</h4>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">TikTok</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 CICLO · Mobilidade para quem move a cidade.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* --- CONFIGURAÇÕES E DADOS --- */
+      const bikesData = [
+        {
+          name: "Speed X3",
+          type: "Elétrica",
+          spec: "80 km",
+          loc: "Centro",
+          weight: "18kg",
+          price: "R$ 15/h",
+          img: "https://images.unsplash.com/photo-1532298229208-32047391037b?auto=format&fit=crop&q=80&w=400",
+        },
+        {
+          name: "Urban Lite",
+          type: "Urbana",
+          spec: "40 km",
+          loc: "Sul",
+          weight: "12kg",
+          price: "R$ 10/h",
+          img: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&q=80&w=400",
+        },
+        {
+          name: "Mountain Pro",
+          type: "MTB",
+          spec: "60 km",
+          loc: "Norte",
+          weight: "15kg",
+          price: "R$ 25/h",
+          img: "https://images.unsplash.com/photo-1576435720res-4277?auto=format&fit=crop&q=80&w=400",
+        },
+        {
+          name: "City Cruiser",
+          type: "Clássica",
+          spec: "30 km",
+          loc: "Leste",
+          weight: "14kg",
+          price: "R$ 12/h",
+          img: "https://images.unsplash.com/photo-1507035895480-ca400704020d?auto=format&fit=crop&q=80&w=400",
+        },
+        {
+          name: "Eco Flow",
+          type: "Elétrica",
+          spec: "100 km",
+          loc: "Centro",
+          weight: "20kg",
+          price: "R$ 20/h",
+          img: "https://images.unsplash.com/photo-1571068316344-75bc74dfe611?auto=format&fit=crop&q=80&w=400",
+        },
+        {
+          name: "Sprint X",
+          type: "Performance",
+          spec: "50 km",
+          loc: "Oeste",
+          weight: "10kg",
+          price: "R$ 30/h",
+          img: "https://images.unsplash.com/photo-1593764592460-47d16912077a?auto=format&fit=crop&q=80&w=400",
+        },
+      ];
+
+      /* --- SELETORES --- */
+      const header = document.getElementById("main-header");
+      const parallaxBg = document.getElementById("parallax-bg");
+      const frotaGrid = document.getElementById("frota-grid");
+      const loader = document.getElementById("main-loader");
+      const metrics = document.querySelectorAll(".metric-number");
+
+      /* --- HEADER SCROLL EFFECT --- */
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) header.classList.add("scrolled");
+        else header.classList.remove("scrolled");
+
+        // Parallax Hero
+        const scroll = window.pageYOffset;
+        parallaxBg.style.transform = `translateY(${scroll * 0.4}px)`;
+      });
+
+      /* --- REVEAL ON SCROLL --- */
+      const observerOptions = { threshold: 0.15 };
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            // Se for um número, inicia o contador
+            if (entry.target.classList.contains("metric-number")) {
+              startCounter(entry.target);
+            }
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObserver.observe(el));
+
+      /* --- COUNTER LOGIC --- */
+      function startCounter(el) {
+        const target = +el.getAttribute("data-target");
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const update = () => {
+          current += step;
+          if (current < target) {
+            el.innerText =
+              Math.floor(current).toLocaleString() +
+              (el.nextElementSibling.innerText.includes("t") ? "t" : "");
+            requestAnimationFrame(update);
+          } else {
+            el.innerText =
+              target.toLocaleString() +
+              (el.nextElementSibling.innerText.includes("t") ? "t" : "");
+          }
+        };
+        update();
+      }
+      metrics.forEach((m) => revealObserver.observe(m));
+
+      /* --- INFINITE SCROLL LOGIC --- */
+      let page = 0;
+      const perPage = 3;
+
+      function createBikeCard(bike) {
+        return `
+                <article class="bike-card">
+                    <div class="bike-img-wrapper">
+                        <img src="${bike.img}" alt="${bike.name}" loading="lazy">
+                        <span class="badge badge-available">Disponível</span>
+                    </div>
+                    <div class="bike-info">
+                        <div class="bike-header">
+                            <h3 class="bike-title">${bike.name}</h3>
+                            <span class="bike-type">${bike.type}</span>
+                        </div>
+                        <div class="bike-specs">
+                            <span>🔋 ${bike.spec}</span>
+                            <span>📍 ${bike.loc}</span>
+                            <span>⚖ ${bike.weight}</span>
+                        </div>
+                        <div class="bike-price">${bike.price}</div>
+                        <a href="#" class="btn-outline">Reservar</a>
+                    </div>
+                </article>
+            `;
+      }
+
+      function loadMoreBikes() {
+        loader.style.display = "block";
+
+        setTimeout(() => {
+          const start = page * perPage;
+          const end = start + perPage;
+          const chunk = bikesData.slice(start, end);
+
+          chunk.forEach((bike) => {
+            const card = document.createElement("div");
+            card.innerHTML = createBikeCard(bike);
+            frotaGrid.appendChild(card);
+          });
+
+          page++;
+          loader.style.display = "none";
+        }, 800);
+      }
+
+      const sentinel = document.getElementById("frota-sentinel");
+      const scrollObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && page * perPage < bikesData.length) {
+            loadMoreBikes();
+          }
+        },
+        { threshold: 0.5 },
+      );
+
+      scrollObserver.observe(sentinel);
+      // Initial Load
+      loadMoreBikes();
+    </script>
+  </body>
+</html>
