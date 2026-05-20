@@ -456,3 +456,268 @@ main {
   gap: 10px;
   margin-right: 15px;
 }
+
+/* Custom Styles for Table Rows and Arrow Icons */
+.content .card2 .table-caption {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 15px;
+}
+
+.content .card2 .table-caption h4 {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.content .card2 .table-caption .wrench-icon {
+  color: var(--text-muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.t-avatar img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.t-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.t-content h5 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.t-content h6 {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.t-gain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.t-gain span {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Side-by-side Row Layout */
+.dashboard-row {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* 6-Cards Grid Layout */
+.right-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* Stat Card Styles */
+.stat-card {
+  background-color: var(--bg-sidebar);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.stat-title {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.stat-value-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.trend-down {
+  color: var(--icon-color-red);
+}
+
+.trend-up {
+  color: var(--icon-color-green);
+}
+
+.stat-subtext {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Colored Card Styles */
+.colored-card {
+  position: relative;
+  color: #ffffff;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 20px;
+  text-align: left;
+}
+
+.bg-card-red {
+  background-color: #ff5252;
+}
+
+.bg-card-green {
+  background-color: #2ecc71;
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.card-large-value {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #ffffff;
+}
+
+.card-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Bottom Stats Cards Row */
+.bottom-stats-container {
+  width: 100%;
+  background-color: var(--bg-sidebar);
+  border-radius: 5px;
+  padding: 25px 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.bottom-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.b-stat-title {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.b-stat-value-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.b-stat-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.b-stat-trend {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.trend-green {
+  color: var(--icon-color-green);
+}
+
+.trend-red {
+  color: var(--icon-color-red);
+}
+
+/* Custom Progress Bar Styling */
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.progress-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+
+  border: 3px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Progress Colors */
+.red-bar {
+  background-color: #ff5252;
+}
+.red-bar .progress-dot {
+  background-color: #ff5252;
+}
+
+.blue-bar {
+  background-color: #448aff;
+}
+.blue-bar .progress-dot {
+  background-color: #448aff;
+}
+
+.green-bar {
+  background-color: #2ecc71;
+}
+.green-bar .progress-dot {
+  background-color: #2ecc71;
+}
+
+.yellow-bar {
+  background-color: #f1c40f;
+}
+.yellow-bar .progress-dot {
+  background-color: #f1c40f;
+}
